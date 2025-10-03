@@ -1,0 +1,67 @@
+name: boss-bridge-audit
+version: 1.0.0
+description: Security audit project for Boss Bridge L1/L2 token bridge protocol
+
+# Project metadata
+project:
+  type: smart-contract-audit
+  framework: foundry
+  language: solidity
+  solidity_version: 0.8.20
+  commit_hash: 07af21653ab3e8a8362bf5f63eb058047f562375
+
+# Audit scope
+scope:
+  contracts:
+    - src/L1BossBridge.sol
+    - src/L1Token.sol
+    - src/L1Vault.sol
+    - src/TokenFactory.sol
+
+  out_of_scope:
+    - test/
+    - script/
+    - lib/
+
+# Deployment targets
+chains:
+  ethereum_mainnet:
+    - L1BossBridge
+    - L1Token
+    - L1Vault
+    - TokenFactory
+  zksync_era:
+    - TokenFactory
+
+# Key dependencies
+dependencies:
+  - openzeppelin-contracts
+  - forge-std
+
+# Security tools
+security_tools:
+  static_analysis:
+    - slither
+    - aderyn
+  testing:
+    - forge-test
+    - forge-coverage
+
+# Known issues (acknowledged by project)
+known_issues:
+  - centralized_bridge_ownership
+  - missing_zero_address_checks
+  - magic_numbers_as_literals
+  - only_L1Token_supported
+
+# Initialization status
+serena:
+  initialized: true
+  initialized_date: 2025-10-03
+  memories:
+    - project_overview
+    - tech_stack
+    - project_structure
+    - suggested_commands
+    - code_style_conventions
+    - task_completion_checklist
