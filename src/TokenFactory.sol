@@ -21,7 +21,16 @@ contract TokenFactory is Ownable {
      * @param contractBytecode The bytecode of the new token
      */
     function deployToken(string memory symbol, bytes memory contractBytecode) public onlyOwner returns (address addr) {
+        // q are you sure you want this out of scope??
+
+        // q maybe this is a gas effiicient way to do this? why are they doing thisi?
         assembly {
+            // X larg e
+            // load the contract bytecode into memory
+            // create a contract
+            // @audit-high this won't work on ZKSync!!
+            // https://docs.zksync.io/zksync-protocol/differences/contract-deployment
+            // test this on zksync
             addr := create(0, add(contractBytecode, 0x20), mload(contractBytecode))
         }
         s_tokenToAddress[symbol] = addr;
